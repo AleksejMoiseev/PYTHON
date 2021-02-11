@@ -7,7 +7,7 @@ class Model:
 
     def __init__(self):
         self._dump_filename = "./movies.dump"
-        self.load()
+        # self.load()
         self._list_movie = list()
 
     def add_movie(self, movie_obj):
@@ -15,19 +15,23 @@ class Model:
         self.show_all()
 
     def dump_to_yml(self):
+        list_for_dump = []
         with open(self._dump_filename, "at") as file:
             for line in self._list_movie:
-                data_to_dump = {'title': 'Firs Peter', 'date_realized': "2020", 'actor': line.actor}
-                yaml.dump(data_to_dump, file)
-                return data_to_dump
+                list_for_dump.append(line.dict_for_to_yaml())
+            yaml.dump(list_for_dump, file)
+        return list_for_dump
 
     def load(self):
         """ load all movie"""
+        i = 0
+        list_movie = []
         try:
             with open(self._dump_filename, "rt") as file:
-                data_movie = yaml.safe_load(file)
-                print(type(data_movie))
-                self._list_movie = data_movie
+                str_obj = yaml.safe_load(file)
+                for mov in str_obj:
+                    list_movie.append(Movie.make_obj(dict_serilization=mov))
+                return list_movie
         except FileNotFoundError:
             f = open(self._dump_filename, "wt")
             f.close()
@@ -54,4 +58,6 @@ if __name__ == '__main__':
     movie_obj = Movie(title="Firs Peter", date_realized=2020, actor=actors)
     mod.add_movie(movie_obj=movie_obj)
     print(mod.dump_to_yml())
+    print(type(mod.load()))
+
 

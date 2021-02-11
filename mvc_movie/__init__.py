@@ -54,8 +54,6 @@ class Actor:
             return cls(**str_obj)
 
 
-
-
 class Movie:
 
     def __init__(self, title, date_realized, actor):
@@ -75,24 +73,35 @@ class Movie:
             list_actors_in_dict.append(act.return_dict())
         return list_actors_in_dict
 
+    def dict_for_to_yaml(self):
+        data_to_yml = {
+            "title": self.title,
+            "date_realized": self.date_realized,
+            "actor": self.list_of_actors_transfer_in_dict()
+        }
+        return data_to_yml
 
-    def to_yml(self):
+    def to_yaml(self):
         with open("movies.dump", "wt") as file:
-            data_to_yml = {
-                "title": self.title,
-                "date_realized": self.date_realized,
-                "actor": self.list_of_actors_transfer_in_dict()
-            }
-            yaml.dump(data=data_to_yml, stream=file)
+            yaml.dump(data=self.dict_for_to_yaml(), stream=file)
 
     @classmethod
-    def from_yml(cls):
+    def from_yaml(cls):
+        list_actors = []
         with open("movies.dump", "rt") as file:
             str_obj = yaml.safe_load(file)
             for act in str_obj["actor"]:
-                act = Actor(**act)
-                print(act)
-            return str_obj["actor"]
+                list_actors.append(Actor(**act))
+            str_obj["actor"] = list_actors
+            return cls(**str_obj)
+
+    @classmethod
+    def make_obj(cls, dict_serilization):
+        list_actors = []
+        for act in dict_serilization["actor"]:
+            list_actors.append(Actor(**act))
+        dict_serilization["actor"] = list_actors
+        return cls(**dict_serilization)
 
 
 
@@ -105,5 +114,9 @@ if __name__ == '__main__':
     ]
     movie1 = Movie(title="First Peter", date_realized=2020, actor=peter)
     # print(movie1.list_of_actors_transfer_in_dict())
-    movie1.to_yml()
-    print(movie1.from_yml())
+    # movie1.to_yaml()
+    # print(movie1.from_yaml())
+    d = {'actor':
+             [{'last_name': 'First', 'name': 'Peter', 'role': 'main_Hero'}, {'last_name': 'Knightley', 'name': 'Kira', 'role': 'Joan Clarke'}, {'last_name': 'Cumberbatch', 'name': 'Benedict', 'role': 'Alan Turing'}],
+         'date_realized': 2020, 'title': 'Firs Peter'}
+    print(movie1.make_obj(dict_serilization=d))
