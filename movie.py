@@ -15,6 +15,5 @@ def main():
     view.dump()
 
 
-
 if __name__ == '__main__':
     main()
