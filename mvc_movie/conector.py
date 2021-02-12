@@ -12,4 +12,4 @@ class Conector:
         return self.model.get_all_movie()
 
     def dump(self):
-        self.model.dump()
+        self.model.dump_to_yml()

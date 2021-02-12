@@ -104,7 +104,6 @@ class Movie:
         return cls(**dict_serilization)
 
 
-
 if __name__ == '__main__':
     actor = Actor(name="Peter", last_name="First", role="King")
     peter = [
