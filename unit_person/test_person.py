@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from unit_person.init_Person2 import Person, NameTooLong
 import unittest
 from datetime import date

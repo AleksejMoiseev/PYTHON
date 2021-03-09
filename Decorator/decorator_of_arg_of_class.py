@@ -27,7 +27,7 @@ class measure_time:
         return inner
 
 
-@measure_time(debug=False)
+@measure_time(debug=True)
 def foo():
     """ Это docstring"""
     print("Start to run")
