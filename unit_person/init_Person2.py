@@ -10,7 +10,7 @@ class Person:
 
     def __init__(self, name, birth_day):
         self.name = name
-        self._birth_day = birth_day
+        self.birth_day = birth_day
 
     @property
     def name(self):
@@ -44,4 +44,6 @@ class Person:
 if __name__ == '__main__':
     t = Person(name="Fedor", birth_day=datetime.date(year=1979, month=8, day=3))
     print(t.age)
+    print(t.name)
+    print(t.birth_day)
 

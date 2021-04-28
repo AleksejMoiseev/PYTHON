@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from unit_person.init_Person2 import Person, NameTooLong
+from init_Person2 import Person, NameTooLong
 import unittest
 from datetime import date
 
@@ -14,7 +14,7 @@ class TestPerson(unittest.TestCase):
         expected_date = date(year=1979, month=8, day=3)
         fedor = Person(name=expected_name, birth_day=expected_date)
 
-        self.assertEqual(fedor.name, "Fedor")
+        self.assertNotEqual(fedor.name, "Fedot")
         self.assertEqual(fedor.birth_day, expected_date)
 
     def test_age(self):
