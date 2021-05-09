@@ -22,7 +22,7 @@ def vm_name():
 
 @pytest.fixture(autouse=True)
 def virtual_machine(monkeypatch, test_ip_address):
-    monkeypatch.setattr(requests, "get", lambda *args, **kwargs: MockedResponse(text="212.35.191.219"))
+    monkeypatch.setattr(requests, "get", lambda *args, **kwargs: MockedResponse(text=test_ip_address))
     return VirtualMashine(name="test_vm")
 
 
