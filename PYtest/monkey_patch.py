@@ -23,6 +23,7 @@ def vm_name():
 @pytest.fixture(autouse=True)
 def virtual_machine(monkeypatch, test_ip_address):
     monkeypatch.setattr(requests, "get", lambda *args, **kwargs: MockedResponse(text=test_ip_address))
+    print(VirtualMashine(name="test_vm"))
     return VirtualMashine(name="test_vm")
 
 
@@ -33,4 +34,9 @@ def test_my_ip_json(virtual_machine, test_ip_address):
     assert 'ip' in jd
     assert test_ip_address == jd['ip']
     assert len(jd) == 1
+
+
+if __name__ == '__main__':
+    s = virtual_machine()
+    print(s)
 
