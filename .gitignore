@@ -10,6 +10,8 @@ PYtest/person/__pycache__/__init__.cpython-38.pyc
 __pycache__/test_person.cpython-38-pytest-6.2.3.pyc
 __pycache__/unit_test.cpython-38-pytest-6.2.3.pyc
 unit_person/__pycache__/
+person/__pycache__/
+/person/__pycache__/
 
 
 

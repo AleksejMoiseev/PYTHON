@@ -3,6 +3,8 @@
 """
 
 import datetime
+import os
+from pathlib import Path
 
 
 class NameTooLong(Exception):
@@ -47,3 +49,8 @@ class Person:
 
 if __name__ == '__main__':
     person = Person(name="fedor", birth_day=datetime.date(year=1979, month=10, day=3))
+    # print(os.path.dirname(__file__))
+    path = os.path.join(os.path.dirname(__file__), 'person_for_check.py')
+    BASE_DIRs = Path(__file__).resolve().parent.parent.joinpath('check_person/person_for_check.py')
+
+    print(BASE_DIRs)
