@@ -15,13 +15,13 @@ url1 = os.path.join(BASE_URL, 'users-1/')
 params = {'limit': 2, "offset": 1}
 
 params_post = {
-        'name': "ANUTA"
+        'name': "ANqqqqq"
     }
 
 
 
 #res = requests.get(url1, params)
-#res1 = requests.post(url1, params_post)
+res1 = requests.post('http://127.0.0.1:8001/issues/', params_post)
 
 
 @pytest.fixture
@@ -44,5 +44,5 @@ def test_check_offset(url__issues):
 
 
 if __name__ == '__main__':
-    res1 = requests.get(url1, {'offset': 1})
+    #res1 = requests.get(url1, {'offset': 1})
     print(res1.json())
