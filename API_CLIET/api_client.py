@@ -21,7 +21,7 @@ params_post = {
 
 
 #res = requests.get(url1, params)
-res1 = requests.post('http://127.0.0.1:8001/issues/', params_post)
+#res1 = requests.post('http://127.0.0.1:8001/issues/', params_post)
 
 
 @pytest.fixture
