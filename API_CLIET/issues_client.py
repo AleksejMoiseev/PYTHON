@@ -37,10 +37,3 @@ class IssuesApiClient:
         path = os.path.join(self.path_list_create, str(pk))
         res = requests.patch(path, params)
         return res
-
-
-if __name__ == '__main__':
-    APICLIENT = IssuesApiClient()
-    print(APICLIENT.get_issue_by_id(pk=40))
-
-

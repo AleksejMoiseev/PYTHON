@@ -47,5 +47,3 @@ class TestIssuesApiClient:
         responce = client.put_issue(pk=100, name='Alex')
         assert responce.status_code == 404
         assert responce.json() == expected_exception
-
-
