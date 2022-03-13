@@ -1,5 +1,8 @@
 import socket
 import json
+"""
+Client
+"""
 data = {
   "method": "upper",
   "args": [
