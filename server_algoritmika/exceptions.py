@@ -42,12 +42,39 @@ class ServerResponceMsg:
     def __init__(self, client, msg):
         self.client = client
         self.msg = msg
-        self.send_msg()
+
+    def get_message(self):
+        return {"message": self.msg}
 
     def msg_to_json(self):
-        msg = {"message": self.msg}
+        msg = self.get_message()
         return json.dumps(msg, cls=json.JSONEncoder).encode("utf-8")
 
     def send_msg(self):
         self.client.send(self.msg_to_json())
         self.client.close()
+
+    def __call__(self, *args, **kwargs):
+        self.send_msg()
+
+
+class InvalidResponce(ServerResponceMsg):
+    def __init__(self, method=None,  *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.method = method
+
+    def get_message(self):
+        return {
+            "message": [
+                {
+                    "method": self.method,
+                    "msg": self.msg
+                }
+            ]
+        }
+
+
+class SucssesResponce(ServerResponceMsg):
+    def get_message(self):
+        return self.msg
+

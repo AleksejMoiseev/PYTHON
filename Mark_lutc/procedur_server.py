@@ -2,13 +2,10 @@ import json
 import socket
 import threading
 
-from pydantic import ValidationError
-from pydantic import PydanticValueError
-
 from Mark_lutc.func_for_check import add, sub, upper
-from server_algoritmika.exceptions import ServerResponceMsg, DataValueError
-from server_algoritmika.helpers import make_config
+from server_algoritmika.exceptions import ServerResponceMsg, DataValueError, InvalidResponce, SucssesResponce
 from server_algoritmika.exceptions import ValidatorRequest, ValidatorResponse
+from server_algoritmika.helpers import make_config
 
 list_funcs = [add, sub, upper]
 CONFIG = make_config(list_funcs)
@@ -19,25 +16,49 @@ class ServerHandler(threading.Thread):
         super().__init__(daemon=True, *args, **kwargs)
         self.registered_procedure = config
         self.client = client
+        self.cleaned_data = None
+
+    @property
+    def cleaned_data(self):
+        return self.__cleaned_data
+
+    @cleaned_data.setter
+    def cleaned_data(self, value):
+        self.__cleaned_data = value
 
     def run(self) -> None:
         data = json.loads(self.client.recv(1024))
-        data = self.validators(data)
-        resp = self.get_result(data=data)
-        ServerResponceMsg(client=self.client, msg=resp)
-        self.client.close()
+        if self.is_valid(params=data):
+            data = self.cleaned_data
+            resp = self.get_result(data=data)
+            SucssesResponce(client=self.client, msg=resp)()
+            self.client.close()
+        else:
+            InvalidResponce(client=self.client, msg="Unhandled errors occurred")
 
     def set_client(self, client):
         self.client = client
 
-    def validators(self, data):
+    def validators(self, params):
         try:
-            data = ValidatorRequest(config=self.registered_procedure, **data)
+            data = ValidatorRequest(config=self.registered_procedure, **params)
             data.is_valid()
+            return True, data
         except DataValueError as exc:
             resp = ValidatorResponse(result=exc.code)
-            ServerResponceMsg(client=self.client, msg=resp.json())
-        return data
+            InvalidResponce(client=self.client, msg=resp.json(), method=params.get('method', "Method not found"))()
+            return False, params
+
+    def is_valid(self, params):
+        is_valid, data = self.validators(params)
+        if is_valid:
+            self.cleaned_data = data
+            return True
+        self.cleaned_data = None
+        return False
+
+
+
 
     def get_result(self, data):
         key = data.method
