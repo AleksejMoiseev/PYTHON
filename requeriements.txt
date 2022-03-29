@@ -1,0 +1,12 @@
+beautifulsoup4==4.9.3
+ipython==7.19.0
+msgpack==0.6.2
+Pillow==7.0.0
+pipreqs==0.4.10
+pycrypto==2.6.1
+pydantic==1.9.0
+PyJWT==1.7.1
+PyQt5==5.14.1
+PyYAML==5.3.1
+regex==2019.8.19
+requests==2.22.0
