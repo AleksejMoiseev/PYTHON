@@ -5,7 +5,7 @@ parameters = pika.ConnectionParameters(host='127.0.0.1', port=5672, credentials=
 connection = pika.BlockingConnection(parameters)
 
 channel = connection.channel()
-method_frame, header_frame, body = channel.basic_get('first')
+method_frame, header_frame, body = channel.basic_get('fan-1')
 
 
 if method_frame:

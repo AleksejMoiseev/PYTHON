@@ -7,14 +7,16 @@ channel = connection.channel()
 
 # cnt = channel.queue_declare(queue='first', passive=True).method.message_count
 
-channel.basic_publish(exchange='amq.fanout', routing_key='', body="Fanout message A")
-channel.basic_publish(
-    exchange='amq.headers',
-    routing_key='head',
-    properties=pika.BasicProperties(
-        headers={
-            'correlation': 1,
-        }
-    ),
-    body="Fanout message A",
-)
+#channel.basic_publish(exchange='amq.fanout', routing_key='', body="Fanout message A")
+#channel.basic_publish(exchange='amq.topic', routing_key='name.age.height', body="Topic message A")
+channel.basic_publish(exchange='amq.topic', routing_key='name.age.rrrrr', body="Topic message A")
+# channel.basic_publish(
+#     exchange='amq.headers',
+#     routing_key='head',
+#     properties=pika.BasicProperties(
+#         headers={
+#             'correlation': 1,
+#         }
+#     ),
+#     body="Fanout message A",
+# )
