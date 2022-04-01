@@ -57,9 +57,6 @@ class ServerHandler(threading.Thread):
         self.cleaned_data = None
         return False
 
-
-
-
     def get_result(self, data):
         key = data.method
         args = data.args

@@ -24,13 +24,16 @@ def get_employees():
 
 def main():
     employees = get_employees()
+
     employees_salary_by_name = []
     employees_with_kpi = []
     employees_with_plan_completion = []
+
     for e in employees:
         employees_salary_by_name.append((e.name, e.payroll()))
         employees_with_kpi.append((e.name, e.kpi))
         employees_with_plan_completion.append((e.name, e.plan_completion))
+
     employees_salary_by_name.sort(key=lambda employee: employee[1], reverse=True)
     employee_with_max_kpi = max(employees_with_kpi, key=lambda employee: employee[1])
     employees_with_max_plan_completion = max(employees_with_plan_completion, key=lambda employee: employee[1])

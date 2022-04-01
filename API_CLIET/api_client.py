@@ -29,20 +29,20 @@ def url__issues():
     return os.path.join(BASE_URL, 'users-1/')
 
 
-def test_check_limit(url__issues):
-    params = {'limit': 1}
-    res = requests.get(url, params)
-    assert res.status_code == 200
-    assert len(res.json()) == 2
+# def test_check_limit(url__issues):
+#     params = {'limit': 1}
+#     res = requests.get(url, params)
+#     assert res.status_code == 200
+#     assert len(res.json()) == 2
+#
+# def test_check_offset(url__issues):
+#     params = {'offset': 1}
+#     res = requests.get(url, params)
+#     assert res.status_code == 200
 
-def test_check_offset(url__issues):
-    params = {'offset': 1}
-    res = requests.get(url, params)
-    assert res.status_code == 200
 
-
-
+API_KEY = os.getenv("WEATHER_API_KEY")
 
 if __name__ == '__main__':
-    #res1 = requests.get(url1, {'offset': 1})
-    print(res1.json())
+    #ryes1 = requests.get(url1, {'offset': 1})
+    print(API_KEY)

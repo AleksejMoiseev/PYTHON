@@ -4,7 +4,7 @@ import json
 Client
 """
 data = {
-  "method": "upper",
+  "method": "uppe",
   "args": [
     'alex',
   ]

@@ -39,7 +39,7 @@ def job4(q_in: Queue, q_out: Queue):
     return value_upper
 
 
-jobs = [job1, job2, job3, job4, job4, job4, job4, job4, job4, job4, job4]
+jobs = [job1, job2, job3, job4, ]
 
 COUNT_CPU = os.cpu_count() - 1
 
@@ -59,4 +59,3 @@ def pipeline():
 
 if __name__ == '__main__':
     print(pipeline())
-
