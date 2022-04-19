@@ -33,6 +33,32 @@ def foo():
     print("Stop running...")
 
 
+def cached(func):
+    from functools import wraps
+    cach = {}
+
+    @wraps(func)
+    def inner(*args, **kwargs):
+        key = str(args) + str(kwargs)
+        if key in cach.keys():
+            return cach[key]
+        else:
+            result = func(*args, **kwargs)
+            cach[key] = result
+            return result
+    return inner
+
+
+@cached
+def boo(n):
+    return n**2
+
+
 if __name__ == '__main__':
-    foo()
-    print(foo.__doc__)  # печатает None
+    # foo()
+    # print(foo.__doc__)  # печатает None
+    print(boo(n=4))
+    print(boo(n=4))
+    print(boo(n=4))
+    print(boo(n=4))
+    print(boo(n=4))
