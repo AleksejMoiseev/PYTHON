@@ -21,5 +21,28 @@ def foo():
     print(a)
 
 
+def fibonacci(n):
+    if n == 0:
+        return 0
+    if n == 1:
+        return 1
+    else:
+        return fibonacci(n - 2) + fibonacci(n - 1)
+
+
+def fib(n):
+    a, b = 0, 1
+    while a < n:
+        yield a
+        a, b = b, a+b
+
+
+
+
+
 if __name__ == '__main__':
-    print(foo())
+    import itertools
+
+    #print(list(itertools.islice(fib(), 100)))
+    for i in fib(100):
+        print(i)
