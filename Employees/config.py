@@ -141,7 +141,7 @@ class ConfigDriver(Enum):
 class ConfigAccountant(Enum):
     hour_rate = 110
     coefficient_by_plan = [
-        (PLAN('>0', '<90'), EXP(*default), {'coef': 0.85, 'extra': 0}),
+        (PLAN('>0', '<90'), EXP(*default),  ),
         (PLAN('>=90', '<100'), EXP(*default), {'coef': 0.95, 'extra': 0}),
         (PLAN('>=100', '<1000'), EXP(*default), {'coef': 1.3, 'extra': 0}),
     ]

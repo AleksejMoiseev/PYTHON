@@ -1,0 +1,12 @@
+Компиляция файлов
+
+gcc 111.cpp -o main
+
+111.cpp -  имя файла который нужно скоппилировать
+main - имя файла куда компилируем
+
+Создание своей библиотеки на С++
+g++ -c -fPIC 111.cpp -o 111.o
+g++ -shared -Wl,-soname,adder.so -o adder.so 111.o
+
+gcc -shared -WL,-soname,adder -o adder.so -fPIC 111.cpp

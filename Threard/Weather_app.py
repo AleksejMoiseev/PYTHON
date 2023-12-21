@@ -39,12 +39,16 @@ def get_weather(city):
     path = f"{URL}?" + get_params
     response = requests.get(path)
     data = response.json()
+
     return data["current"]["temp_c"]
 
 
 def add_weather(city):
+    print('!!!!!!!!!!!!!!!!!')
     value = get_weather(city)
+    print('!data!!!', value)
     STORAGE_WEATHER[city] = value
+    print(STORAGE_WEATHER)
 
 
 @measure_time
@@ -52,18 +56,22 @@ def thread_requests():
     threads = []
     for city in CITIES:
         thread = threading.Thread(target=add_weather, args=(city,))
-        threads.append(thread)
-    for thread in threads:
-        thread.run()
+        thread.start()
+    #     threads.append(thread)
+    # for thread in threads:
+    #     thread.run()
+    #     # thread.start()
 
 
 @measure_time
 def blocked_requests():
     for city in CITIES:
         STORAGE_WEATHER[city] = get_weather(city)
-
+for city in CITIES:
+    thread = threading.Thread(target=add_weather, args=(city,))
+    thread.start()
 
 if __name__ == "__main__":
     #thread_requests()
-    blocked_requests()
+    # blocked_requests()
     print(STORAGE_WEATHER)
