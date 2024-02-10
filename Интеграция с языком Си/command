@@ -1,5 +1,5 @@
 Компиляция файлов
-
+# https://www.youtube.com/watch?v=nxyiLiecC6M
 gcc 111.cpp -o main
 
 111.cpp -  имя файла который нужно скоппилировать
