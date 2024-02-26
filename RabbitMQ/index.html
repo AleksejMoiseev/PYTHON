@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BattelShips</title>
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@5.0.0/bundles/stomp.umd.min.js"></script>
+</head>
+<script type="module">
+  const client = new Client();
+  client.brokerURL = 'ws://localhost:15674/ws';
+  console.log(client.brokerURL);
+  // const client = new Client({
+  //   brokerURL: 'ws://127.0.0.1:15674/ws',
+  //   onConnect: () => {
+  //     client.subscribe('/topic/test01', message =>
+  //       console.log(`Received: ${message.body}`)
+  //     );
+  //     client.publish({ destination: '/topic/test01', body: 'First Message' });
+  //   },
+  // });
+
+  // client.activate();
+</script>
